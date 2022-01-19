@@ -1,20 +1,68 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
+import GlobalFeed from "@/views/GlobalFeed";
 import Registering from "@/views/Registering";
+import Login from "@/views/Login";
 
 Vue.use(VueRouter)
 
 const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: Home
-    },
+
     {
         path: '/registering',
         name: 'registering',
         component: Registering
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login
+    },
+
+    {
+        path: '/',
+        name: 'globalFeed',
+        component: GlobalFeed
+    },
+    {
+        path: '/feed',
+        name: 'yourFeed',
+        component: GlobalFeed
+    },
+    {
+        path: '/tags/:slug',
+        name: 'tag',
+        component: GlobalFeed
+    },
+    {
+        path: '/articles/new',
+        name: 'createArticle',
+        component: GlobalFeed
+    },
+    {
+        path: '/articles/:slug',
+        name: 'article',
+        component: GlobalFeed
+    },
+    {
+        path: '/articles/:slug/edit',
+        name: 'editArticle',
+        component: GlobalFeed
+    },
+    {
+        path: '/settings',
+        name: 'settings',
+        component: GlobalFeed
+    },
+    {
+        path: '/profiles/:slug',
+        name: 'userProfile',
+        component: GlobalFeed
+    },
+    {
+        path: '/profiles/:slug/favorites',
+        name: 'userProfileFavorites',
+        component: GlobalFeed
     },
 ]
 

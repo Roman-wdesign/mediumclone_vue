@@ -5,7 +5,7 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Sign Up</h1>
           <p class="text-xs-center">
-            <router-link to="{name: 'login'}">Need an account?</router-link>
+            <router-link :to="{name: 'login'}">Have an account?</router-link>
           </p>
 
           <!--- props который validation-errors передаем данные отсюда в  компонент validationErrors
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import McvValidationErrors from '@/components/ValidationErrors'
 import {actionTypes} from "@/store/modules/auth";
 
@@ -62,14 +63,19 @@ export default {
     username: ''
   }),
   computed: {
-    isSubmitting() {
-      // присваивает значение из state.count в count
-      //получение данных из state (VueX) и вывод через computed
-      return this.$store.state.auth.isSubmitting
-    },
-    validationErrors() {
-      return this.$store.state.auth.validationErrors
-    }
+
+    ...mapState({
+      isSubmitting: state => state.auth.isSubmitting,
+      validationErrors: state => state.auth.validationErrors
+    })
+    // isSubmitting() {
+    //   // присваивает значение из state.count в count
+    //   //получение данных из state (VueX) и вывод через computed
+    //   return this.$store.state.auth.isSubmitting
+    // },
+    // validationErrors() {
+    //   return this.$store.state.auth.validationErrors
+    // }
   },
   methods: {
     onSubmit() {
@@ -92,7 +98,7 @@ export default {
             //пишем алиасом name:'home', если вдруг поменяется путь,
             // то алиас в приложении не нужно будет менять
             // {перебрасывает при регистрации на главную}
-            this.$router.push({name: 'home'})
+            this.$router.push({name: 'globalFeed'})
           })
     },
 
