@@ -47,6 +47,7 @@ import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/feed'
 import McvPagination from '@/components/Pagination'
 import {limit} from '@/helpers/vars';
+import {stringify, parseUrl} from 'query-string'
 
 export default {
   name: "McvFeed",
@@ -59,8 +60,8 @@ export default {
   },
   data: () => ({
     limit,
-    url:'/',
-    total:500
+    url: '/',
+    total: 500
   }),
   components: {
     McvPagination,
@@ -77,6 +78,9 @@ export default {
 
     baseUrl() {
       return this.$route.path
+    },
+    offset() {
+      return this.currentPage * limit - limit
     }
   },
   watch: {
@@ -90,9 +94,17 @@ export default {
     return this.fetchFeed()
   },
   methods: {
-      fetchFeed(){
-        this.$store.dispatch(actionTypes.getFeed, {apiUrl: this.apiUrl})
-      }
+    fetchFeed() {
+      const parsedUrl = parseUrl(this.apiUrl)
+      const stringifiedParams = stringify({
+        limit,
+        offset: this.offset,
+        ...parsedUrl.query
+      })
+      const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
+
+      this.$store.dispatch(actionTypes.getFeed, {apiUrl: apiUrlWithParams})
+    }
   },
 }
 </script>
