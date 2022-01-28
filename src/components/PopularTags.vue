@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading ...</div>
-    <div v-if="error">You have some error.</div>
+    <mcv-loading v-if="isLoading"/>
+    <mcv-error-message :message="'error has been received'"/>
     <div class="side-bar" v-if="popularTags">
       <p>Popular Tags</p>
       <div class="tag-list">
@@ -21,9 +21,15 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/popularTags'
+import McvLoading from '@/components/Loading'
+import McvErrorMessage from "@/components/ErrorMessage";
 
 export default {
   name: "McvPopularTags",
+  components:{
+    McvErrorMessage,
+    McvLoading
+  },
   computed: {
     ...mapState({
       isLoading: state => state.popularTags.isLoading,

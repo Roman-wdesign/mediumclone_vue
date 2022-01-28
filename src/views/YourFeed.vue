@@ -16,17 +16,16 @@
 </template>
 
 <script>
-
-import McvFeed from "@/components/Feed";
-import McvPopularTags from "@/components/PopularTags";
 import McvBanner from "@/components/Banner";
+import McvPopularTags from "@/components/PopularTags";
+import McvFeed from "@/components/Feed";
 import McvFeedToggler from "@/components/FeedToggler";
 
 export default {
-  name: "McvGlobalFeed",
+  name: "McvYourFeed",
   components: {McvFeedToggler, McvBanner, McvPopularTags, McvFeed},
   data: () => ({
-    apiUrl: '/articles'
+    apiUrl: '/articles/feed'
   }),
 }
 </script>
